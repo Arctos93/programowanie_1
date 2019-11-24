@@ -266,7 +266,7 @@ public class SingleLinkedListTest {
         underTest.addFirst(888);
         underTest.addFirst(777);
         underTest.addFirst(444);
-        underTest.addFirst(999);
+        underTest.addLast(999);
 
         assertTrue(underTest.contains(999));
     }

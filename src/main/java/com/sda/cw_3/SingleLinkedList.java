@@ -3,19 +3,22 @@ package com.sda.cw_3;
 public class SingleLinkedList implements SimpleList {
 
     private Node head = null;
+    private Node tail = null;
+
+    private int size;
 
     @Override
     public void addFirst(int element) {
 
-        head = new Node(element, head);
-
-//        if (head == null) {
-//            Node newNode = new Node(element, null);
-//            head = newNode;
-//        } else {
-//            Node newNode = new Node(element, head);
-//            head = newNode;
-//        }
+        if (head == null) {
+            Node newNode = new Node(element, null);
+            head = newNode;
+            tail = newNode;
+        } else {
+            Node newNode = new Node(element, head);
+            head = newNode;
+        }
+        size++;
     }
 
     @Override
@@ -24,12 +27,10 @@ public class SingleLinkedList implements SimpleList {
             addFirst( element);
             return;
         }
-        Node current=head;
-        while(current.hasNext()){
-            current=current.next();
-        }
         Node newNode=new Node(element,null);
-        current.next(newNode);
+        tail.next(newNode);
+        tail = newNode;
+        size++;
 
     }
 
@@ -50,6 +51,7 @@ public class SingleLinkedList implements SimpleList {
             }
             Node newNode = new Node(element, current.next());
             current.next(newNode);
+            size++;
 
         }
 
@@ -62,6 +64,10 @@ public class SingleLinkedList implements SimpleList {
         }
         int result = head.value();
         head = head.next();
+        if (size == 1) {
+            tail = null;
+        }
+        size--;
         return result;
     }
 
@@ -76,6 +82,8 @@ public class SingleLinkedList implements SimpleList {
             }
             int result = current.next().value();
             current.next(null);
+            tail = current;
+            size--;
             return result;
         }
     }
@@ -99,6 +107,7 @@ public class SingleLinkedList implements SimpleList {
             }
             int result = current.next().value();
             current.next(current.next().next());
+            size--;
             return result;
         }
     }
@@ -126,31 +135,23 @@ public class SingleLinkedList implements SimpleList {
         if (head == null) {
             return false;
         }
-        if (head.value() == element) {
-            return true;
-        }
         Node current  = head;
-        while (current.hasNext()) {
+        while (true) {
             if (current.value() == element) {
                 return true;
             }
-            current = current.next();
+            if (current.hasNext()) {
+                current = current.next();
+            } else {
+                break;
+            }
         }
         return false;
     }
 
     @Override
     public int size() {
-        if(head == null){
-            return 0;
-        }else {
-            int counter = 1;
-            Node current = head;
-            while(current.hasNext()){
-                current = current.next();
-                counter++;
-            }
-            return counter;
-        }
+        return size;
+
     }
 }
