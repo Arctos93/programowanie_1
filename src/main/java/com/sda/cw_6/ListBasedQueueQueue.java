@@ -27,6 +27,9 @@ public class ListBasedQueueQueue implements SimpleQueue {
 
     @Override
     public int peek() {
+        if (isEmpty()) {
+            throw new EmptyQueueException();
+        }
         return list.get(0);
     }
 }

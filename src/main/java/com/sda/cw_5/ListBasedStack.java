@@ -29,6 +29,9 @@ public class ListBasedStack implements SimpleStack {
 
     @Override
     public int peek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
         return list.get(0);
     }
 }

@@ -32,16 +32,19 @@ public class ArrayBasedStack implements SimpleStack {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return top == 0;
     }
 
     @Override
     public int peek() {
-        return 0;
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return array[top - 1];
     }
 
     @Override
     public boolean isFull() {
-        return false;
+        return top == array.length;
     }
 }
