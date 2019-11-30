@@ -1,5 +1,7 @@
 package com.sda.cw_8;
 
+import static com.sda.cw_8.ArrayUtils.swap;
+
 public class BubbleSorter implements Sorter {
 
     @Override
@@ -11,11 +13,5 @@ public class BubbleSorter implements Sorter {
                 }
             }
         }
-    }
-
-    private void swap(int[] arr, int i1, int i2) {
-        int tmp = arr[i1];
-        arr[i1] = arr[i2];
-        arr[i2] = tmp;
     }
 }
