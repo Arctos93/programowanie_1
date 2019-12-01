@@ -18,11 +18,7 @@ public class InsertionSort implements Sorter {
     }
 
     private int findInsertionIndex(int[] arr, int currentIdx, int toInsert) {
-        for (int i = 0; i < currentIdx; i++) {
-            if(arr[i] > toInsert) {
-                return i;
-            }
-        }
-        return currentIdx;
+        int insertionIdx = Arrays.binarySearch(arr, 0, currentIdx, toInsert);
+        return insertionIdx >= 0 ? insertionIdx : (insertionIdx + 1) * (-1);
     }
 }
